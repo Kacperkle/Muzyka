@@ -108,29 +108,23 @@ public class MainActivity extends AppCompatActivity {
     private void wczytajDaneZPlikuAssets() {
         BufferedReader reader = null;
         try {
-            // Otwieramy plik data.txt z folderu assets linijka po linijce
             reader = new BufferedReader(new InputStreamReader(getAssets().open("Data.txt")));
             String linia;
 
             while ((linia = reader.readLine()) != null) {
-                // Usuwamy ewentualne białe znaki (np. spacje na końcu)
                 linia = linia.trim();
 
-                // Jeśli linia jest pusta (odstęp między albumami), pomijamy ją
                 if (linia.isEmpty()) {
                     continue;
                 }
 
-                // Skoro linia nie była pusta, to jest to 'wykonawca'
                 String wykonawca = linia;
 
-                // Czytamy kolejne linie przypisane do danego albumu
                 String tytul = reader.readLine().trim();
                 int liczbaUtworow = Integer.parseInt(reader.readLine().trim());
                 int rokWydania = Integer.parseInt(reader.readLine().trim());
                 long liczbaPobran = Long.parseLong(reader.readLine().trim());
 
-                // Tworzymy obiekt Album i dodajemy go do listy
                 listaAlbumy.add(new Album(wykonawca, tytul, liczbaUtworow, rokWydania, liczbaPobran));
             }
         } catch (IOException e) {
